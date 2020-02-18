@@ -1,6 +1,6 @@
 # Bornfight 3D
 
-A 3D model of the 4th floor in Bornfight offices.
+A 3D model of the 4th floor of Bornfight offices.
 
 ![](/renders/cycles/_ured9.jpg)
 
