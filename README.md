@@ -31,3 +31,11 @@ A 3D model of the 4th floor of Bornfight offices.
 
 ![](/gifs/gif1.gif)  |  ![](/gifs/gif2.gif)   |  ![](/gifs/gif3.gif)
 :-------------------------:|:-------------------------:|:-------------------------:
+
+
+## Progress Pics :)
+
+
+![](/renders/wip/wip1.png)  |  ![](/renders/wip/wip2.png)   |  ![](/renders/wip/wip3.png)
+:-------------------------:|:-------------------------:|:-------------------------:
+![](/renders/wip/wip4.png)  |  ![](/renders/wip/wip5.png)   |  ![](/renders/wip/wip6.png)
