@@ -54,8 +54,13 @@ public class PlayerShoot : NetworkBehaviour
     [Client]
     void Shoot()
     {
-
         Debug.Log("SHOOT");
+        // Debug.Log(currentWeapon.GetType());
+        SimpleShoot sn = weaponManager.GetWeaponInstance().GetComponent<SimpleShoot>();
+        if (sn)
+        {
+            sn.ShootWeapon();
+        }
         RaycastHit _hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, currentWeapon.range, mask))
         {

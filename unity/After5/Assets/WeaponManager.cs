@@ -15,9 +15,11 @@ public class WeaponManager : NetworkBehaviour
 
     private PlayerWeapon currentWeapon;
 
+    private GameObject _weaponInstance;
+
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         EquipWeapon(primaryWeapon);
     }
 
@@ -38,10 +40,17 @@ public class WeaponManager : NetworkBehaviour
         {
             _weaponIns.layer = LayerMask.NameToLayer(weaponLayerName);
         }
+
+        _weaponInstance = _weaponIns;
     }
 
     public PlayerWeapon GetCurrentWeapon()
     {
         return currentWeapon;
+    }
+
+    public GameObject GetWeaponInstance()
+    {
+        return _weaponInstance;
     }
 }
