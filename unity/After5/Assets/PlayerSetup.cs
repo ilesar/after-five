@@ -19,7 +19,8 @@ public class PlayerSetup : NetworkBehaviour
 
     [SerializeField]
     GameObject playerUIPrefab;
-    private GameObject playerUIInstance;
+    [HideInInspector]
+    public GameObject playerUIInstance;
 
     Camera sceneCamera;
 
@@ -34,7 +35,7 @@ public class PlayerSetup : NetworkBehaviour
             sceneCamera = Camera.main;
             if (sceneCamera != null)
             {
-                Camera.main.gameObject.SetActive(false);
+                sceneCamera.gameObject.SetActive(false);
             }
 
             SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayerName));

@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     public MatchSettings matchSettings;
     private const string PLAYER_ID_PREFIX = "Player ";
 
+    [SerializeField]
+    private GameObject sceneCamera;
+
     private static Dictionary<string, Player> players = new Dictionary<string, Player>();
 
     void Awake ()
@@ -49,6 +52,16 @@ public class GameManager : MonoBehaviour
 
         GUILayout.EndVertical();
         GUILayout.EndArea();
+    }
+
+    public void SetSceneCameraActive(bool isActive)
+    {
+        if (sceneCamera == null)
+        {
+            return;
+        }
+
+        sceneCamera.SetActive(isActive);
     }
 
 
