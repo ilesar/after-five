@@ -21,16 +21,17 @@ public class Player : NetworkBehaviour
     private Behaviour[] disableOnDeath;
     private bool[] wasEnabled;
 
-    public void Setup ()
-    {
-        wasEnabled = new bool[disableOnDeath.Length];
+    private bool firstSetup = true;
 
-        for(int i = 0; i < wasEnabled.Length; i++)
+    public void SetupPlayer()
+    {
+        if (isLocalPlayer)
         {
-            wasEnabled[i] = disableOnDeath[i].enabled;
+            GameManager.instance.SetSceneCameraActive(false);
+            GetComponent<PlayerSetup>().playerUIInstance.setActive(true);
         }
 
-        SetDefaults();
+        CmdBroadCastNewPlayerSetup();
     }
 
     // void Update()
@@ -45,6 +46,30 @@ public class Player : NetworkBehaviour
     //         RpcTakeDamage(9999999);
     //     }
     // }
+
+    [Command]
+    private void CmdBroadCastNewPlayerSetup()
+    {
+        RpcSetupPlayerOnAllClients();
+    }
+
+    [ClientRpc]
+    private void RpcSetupPlayerOnAllClients()
+    {
+        if (firstSetup)
+        {
+            wasEnabled = new bool[disableOnDeath.Length];
+
+            for (int i = 0; i < wasEnabled.Length; i++)
+            {
+                wasEnabled[i] = disableOnDeath[i].enabled;
+            }
+
+            firstSetup = false;
+        }
+
+        SetDefaults();
+    }
 
     [ClientRpc]
     public void RpcTakeDamage(int _amount)
@@ -92,6 +117,10 @@ public class Player : NetworkBehaviour
         Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = _spawnPoint.position;
         transform.rotation = _spawnPoint.rotation;
+        
+        yield return new WaitForSeconds(0.1f);
+
+        SetupPlayer();
 
         Debug.Log(transform.name + " respawned.");
     }

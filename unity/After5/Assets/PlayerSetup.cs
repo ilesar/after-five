@@ -2,6 +2,7 @@
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(Player))]
+[RequireComponent(typeof(PlayerController))]
 public class PlayerSetup : NetworkBehaviour
 {
     
@@ -40,9 +41,19 @@ public class PlayerSetup : NetworkBehaviour
 
             playerUIInstance = Instantiate(playerUIPrefab);
             playerUIInstance.name = playerUIPrefab.name;
-        }
 
-        GetComponent<Player>().Setup();
+            PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
+
+            if (ui == null)
+            {
+                Debug.LogError("No PlayerUI component on PlayerUI prefab.");
+            }
+
+            ui.SetController(GetComponent<PlayerController>());
+
+            GetComponent<Player>().SetupPlayer();
+        }
+        
     }
 
 
@@ -80,11 +91,12 @@ public class PlayerSetup : NetworkBehaviour
 
     void OnDisable() {
         Destroy(playerUIInstance);
-        
-        if (sceneCamera != null) {
-            sceneCamera.gameObject.SetActive(true);
-        }
 
+        if (isLocalPlayer)
+        {
+            GameManager.instance.SetSceneCameraActive(true);
+        }
+        
         GameManager.UnRegisterPlayer(transform.name);
     }
 }
