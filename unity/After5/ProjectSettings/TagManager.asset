@@ -13,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - LocalPlayer
+  - RemotePlayer
+  - DontDraw
+  - Weapon
   - 
   - 
   - 
