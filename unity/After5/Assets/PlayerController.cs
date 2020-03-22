@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private float speed = 5f;
     [SerializeField]
     private float lookSensitivity = 5f;
-
+    
     [SerializeField]
     private float thrusterForce = 1000f;
 
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
+
         RaycastHit _hit;
         if (Physics.Raycast(transform.position, Vector3.down, out _hit, 100f, environmentMask))
         {
